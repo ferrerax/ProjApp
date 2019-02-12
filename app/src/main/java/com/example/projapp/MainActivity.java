@@ -24,7 +24,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     private TextView comando;
-    private String resultat; //el que he parlat
+    private String resultat;
     private String IP = "192.168.0.148";
     private int PORT = 5500;
     private TextView response;
@@ -77,24 +77,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void envia_reb (){   //https://www.youtube.com/watch?v=6kPOhWqHqZc   per rebre
-        log(" socket " + IP + " " + PORT);
-        try {
-            Socket sk = new Socket(IP, PORT);
-            BufferedReader entrada = new BufferedReader(new InputStreamReader(sk.getInputStream()));
-            PrintWriter salida = new PrintWriter(new OutputStreamWriter(sk.getOutputStream()));
-            log("enviando... ");
-            salida.println(resultat);
-            log("recibiendo ... " + entrada.readLine());
-            sk.close();
-        } catch (Exception e) {
-            log("error: " + e.toString());
-        }
-    }
-
-    private void log(String string) {
-        response.append(string + "\n");
-    }
 
 
     @Override
@@ -105,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
                     if(resultCode == RESULT_OK && data != null){
                         ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                         resultat = result.get(0);
-                        envia_reb();
                     }
 
                     break;
